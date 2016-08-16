@@ -19,3 +19,13 @@ cc_library(
     visibility = ["//visibility:public"],
 )
 
+cc_library(
+    name = "qt_gui",
+    hdrs = glob(["QtGui/**"]),
+    includes = ["."],
+    deps = [":qt_core"],
+    linkopts = [
+        "-lQt5Gui",
+    ],
+    visibility = ["//visibility:public"],
+)
