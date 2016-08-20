@@ -22,6 +22,7 @@ qt_cc_library(
     deps = [
         "@qt//:qt_core",
         "@qt//:qt_widgets",
+        "@qt//:qt_gui",
     ],
     ui = "mainwindow.ui",
     ui_deps = [
