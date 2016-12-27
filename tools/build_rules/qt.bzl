@@ -19,7 +19,8 @@ def qt_ui_library(name, ui, deps):
       deps = deps,
   )
 
-def qt_cc_library(name, src, hdr, deps, ui=None, ui_deps=None, **kwargs):
+def qt_cc_library(name, src, hdr, normal_hdrs=[], deps=None, ui=None,
+                  ui_deps=None, **kwargs):
   """Compiles a QT library and generates the MOC for it.
 
   If a UI file is provided, then it is also compiled with UIC.
@@ -27,7 +28,8 @@ def qt_cc_library(name, src, hdr, deps, ui=None, ui_deps=None, **kwargs):
   Args:
     name: A name for the rule.
     src: The cpp file to compile.
-    hdr: The header file corresponding to the src.
+    hdr: The single header file that the MOC compiles to src.
+    normal_hdrs: Headers which are not sources for generated code.
     deps: cc_library dependencies for the library.
     ui: If provided, a UI file to compile with UIC.
     ui_deps: Dependencies for the UI file.
@@ -46,10 +48,12 @@ def qt_cc_library(name, src, hdr, deps, ui=None, ui_deps=None, **kwargs):
     qt_ui_library("%s_ui" % name, ui, deps=ui_deps)
     deps.append("%s_ui" % name)
 
+  hdrs = [hdr] + normal_hdrs
+
   native.cc_library(
       name = name,
       srcs = srcs,
-      hdrs = [hdr],
+      hdrs = hdrs,
       deps = deps,
       **kwargs
   )
