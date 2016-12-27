@@ -16,6 +16,10 @@ qt_cc_library(
     name = "mainwindow",
     src = "mainwindow.cpp",
     hdr = "mainwindow.h",
+    normal_hdrs = [
+        'test_header.h',
+        'test_header2.h',
+    ],
     copts = [
         '-fpic',
     ],
