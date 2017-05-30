@@ -10,7 +10,7 @@ def qt_ui_library(name, ui, deps):
       name = "%s_uic" % name,
       srcs = [ui],
       outs = ["ui_%s.h" % ui.split('.')[0]],
-      cmd = "/usr/bin/uic $(locations %s) -o $@" % ui,
+      cmd = "uic $(locations %s) -o $@" % ui,
   )
 
   native.cc_library(
@@ -39,7 +39,7 @@ def qt_cc_library(name, src, hdr, normal_hdrs=[], deps=None, ui=None,
       name = "%s_moc" % name,
       srcs = [hdr],
       outs = ["moc_%s.cpp" % name],
-      cmd =  "/usr/bin/moc $(location %s) -o $@ -f'%s'" \
+      cmd =  "moc $(location %s) -o $@ -f'%s'" \
         % (hdr, '%s/%s' % (PACKAGE_NAME, hdr)),
   )
   srcs = [src, ":%s_moc" % name]
