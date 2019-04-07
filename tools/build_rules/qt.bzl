@@ -40,7 +40,7 @@ def qt_cc_library(name, src, hdr, normal_hdrs=[], deps=None, ui=None,
       srcs = [hdr],
       outs = ["moc_%s.cpp" % name],
       cmd =  "moc $(location %s) -o $@ -f'%s'" \
-        % (hdr, '%s/%s' % (PACKAGE_NAME, hdr)),
+        % (hdr, '%s/%s' % (native.package_name(), hdr)),
   )
   srcs = [src, ":%s_moc" % name]
 
